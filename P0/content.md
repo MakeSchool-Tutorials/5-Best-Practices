@@ -35,6 +35,8 @@ This way the UI is usable on all different device sizes. For resizing the actual
 
 In a puzzle game with a fixed size grid that is not possible. Here you will have to make the grid work on the smallest device you support. On larger screens you can scale that grid and potentially present additional information that is *nice to have* but not required for the core gameplay.
 
+The right mindset is the most important. Try to think through what your game would look like on different screen sizes and avoid constants for screen width and screen height.
+
 ##2. Separation of game mechanics and game content
 
 Your game mechanics should be modeled in code, your game content should be modeled in resource files. This is especially important for level based games and other content rich games (e.g. quiz games). Tools like [SpriteBuilder](spritebuilder.com) can make it easier to keep these two parts of your game separate.
@@ -50,11 +52,9 @@ A general rule of Software Development is that each module of code should only c
 
 ![](1_resource_vs_code.png)
 
-What types of resource files should you use? For games like jump and run platformers, which can have visually complex levels, I recommend using SpriteBuilder and creating one CCB File (SpriteBuilder's scene file) for each level. If you are building a quiz game or a text adventure you should use a resource file that allows you to structure information easily. On iOS [property lists](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/PropertyLists/QuickStartPlist/QuickStartPlist.html#//apple_ref/doc/uid/10000048i-CH4-SW5) are a great type of structured resource file. Xcode provides a nice plist editor and iOS has built in parsers to generate dictionaries and arrays from plists. There are many other types of structured resource file such as XML and JSON. I recommend using property lists except you need a feature that they don't support.
+What types of resource files should you use? For games like jump and run platformers, which can have visually complex levels, I recommend using SpriteBuilder and creating one CCB File (SpriteBuilder's scene file) for each level. If you are building a quiz game or a text adventure you should use a resource file that allows you to structure information easily. On iOS [property lists](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/PropertyLists/QuickStartPlist/QuickStartPlist.html#//apple_ref/doc/uid/10000048i-CH4-SW5) are a great type of structured resource file. Xcode provides a nice plist editor and iOS has built in parsers to generate dictionaries and arrays from plists. There are many other types of structured resource file such as XML and JSON. I recommend using property lists unless you need a feature that they don't support.
 
 If you strictly separate game code from game content you gain some more advantages: level designers can create new levels without modifying the game code and you can easily create content that can be added to the game dynamically, after you have shipped it.
-
-The right mindset is the most important. Try to think through what your game would look like on different screen sizes and avoid constants for screen width and screen height.
 
 ##3. Use the update loop for time dependent actions
 
@@ -72,7 +72,7 @@ Whatever game engine you use, make sure your timers are integrated with the upda
 
 ##4. Use composition to share behavior between different classes
 
-Imagine a game where you have 20 different types of enemies. Each of them have some behavior in common (they can loose energy, they can switch to immortal mode) and they have some specific characteristics (one can jump, another one can move at double speed). 
+Imagine a game where you have 20 different types of enemies. Each of them have some behavior in common (they can lose energy, they can switch to immortal mode) and they have some specific characteristics (one can jump, another one can move at double speed). 
 
 How could you model this game in code? One approach would be creating an enemy class with the common behavior and 20 subclasses that each have their specific behavior. But what if some of these enemies are very similar sharing 4 out of 5 characteristics? Take a look at the following example inheritance diagram:
 
@@ -90,7 +90,7 @@ Creating a new enemy type could look somewhat like this:
     immortalityComponent = ImmortalityComponent()
     enemy = Enemy(jumpComponent, immortalityComponent)
     
-One last question we should discuss is how these components are implemented. A *jump* component for example will need a way to actually move the enemy object it belongs to. In most simple cases it is sufficient to have a bunch of public variables on the class that owns the components. These variables include anything that can be changed by components (e.g. speed, position, health, etc.). Each component gets a reference to the object it belongs to and can read and modify these public variables. There are many different ways how to implement this pattern, you can read a great and extensive discussion in the [Game Programming Patterns Book](http://gameprogrammingpatterns.com/component.html).
+One last question we should discuss is how these components are implemented. A *jump* component for example will need a way to actually move the enemy object it belongs to. In most simple cases it is sufficient to have a bunch of public variables on the class that owns the components. These variables include anything that can be changed by components (e.g. speed, position, health, etc.). Each component gets a reference to the object it belongs to and can read and modify these public variables. There are many different ways to implement this pattern, you can read a great and extensive discussion about it in the [Game Programming Patterns Book](http://gameprogrammingpatterns.com/component.html).
 
 This is one of the patterns that I believe are useful early on in a game developer career!
 
