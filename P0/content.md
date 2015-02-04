@@ -31,11 +31,11 @@ What else should you think about? Typically I try to divide the content on the s
 
 ![](2_multiple_screen_sizes.png)
 
-This way the UI is usable on all different device sizes. For resizing the actual gameplay there is no silver bullet. In a sidescroller for example it will mostly be acceptable to shower a smaller portion of the game on a smaller device, just as in the example image above.
+This way the UI is usable on all different device sizes. For resizing the actual gameplay there is no silver bullet. In a sidescroller for example it will mostly be acceptable to show a smaller portion of the game on a smaller device, just as in the example image above.
 
 In a puzzle game with a fixed size grid that is not possible. Here you will have to make the grid work on the smallest device you support. On larger screens you can scale that grid and potentially present additional information that is *nice to have* but not required for the core gameplay.
 
-##2. Separate game mechanics from game content
+##2. Separation of game mechanics and game content
 
 Your game mechanics should be modeled in code, your game content should be modeled in resource files. This is especially important for level based games and other content rich games (e.g. quiz games). Tools like [SpriteBuilder](spritebuilder.com) can make it easier to keep these two parts of your game separate.
 
