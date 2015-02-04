@@ -3,7 +3,7 @@ title: 5 Best practices for mobile game development
 slug: best-practices
 --- 
 
-This article was created in preparation of a Codementor office hour. 
+This article was created in preparation for a Codementor office hour. 
 It discusses 5 best practices for game development that can help you avoid common mistakes.
 
 Here's a recording of the office hour, you can find a full transcript below:
