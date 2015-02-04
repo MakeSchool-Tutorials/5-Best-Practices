@@ -6,6 +6,12 @@ slug: best-practices
 This article was created in preparation of a Codementor office hour. 
 It discusses 5 best practices for game development that can help you avoid common mistakes.
 
+Here's a recording of the office hour, you can find a full transcript below:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xFyWAFX_tuE" frameborder="0" allowfullscreen></iframe>
+
+If you are interested in learning more about mobile game development you should apply to our [Summer Academy](https://www.makeschool.com/summer-academy?referrer=54750)!
+
 ##1. Don't make assumptions about the screen size
 
 Even if you develop your game for iOS only it will run on a vast amount of different devices. The days in which you know the exact screen dimensions under which your game will operate are finally over. Luckily things aren't as bad as trying to make a website look good on all possible devices (think Computers, Smartphones, Televisions, Watches) but we need to put some thought into designing for multiple screen sizes.
@@ -116,3 +122,5 @@ Using the factory pattern we can hide this complexity behind simpler methods. Th
     
 Now we have a simple interface for creating different enemy types and our enemies consist of reusable components, great!
 I hope you enjoyed these best practices, they should help you avoid some common mistakes.
+
+You will have the chance to learn more best practices at our [Summer Academy](https://www.makeschool.com/summer-academy?referrer=54750).
