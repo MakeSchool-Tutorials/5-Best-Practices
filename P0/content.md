@@ -39,7 +39,7 @@ The right mindset is the most important. Try to think through what your game wou
 
 ##2. Separation of game mechanics and game content
 
-Your game mechanics should be modeled in code, your game content should be modeled in resource files. This is especially important for level based games and other content rich games (e.g. quiz games). Tools like [SpriteBuilder](spritebuilder.com) can make it easier to keep these two parts of your game separate.
+Your game mechanics should be modeled in code, your game content should be modeled in resource files. This is especially important for level based games and other content rich games (e.g. quiz games). Tools like [SpriteBuilder](http://www.spritebuilder.com/) can make it easier to keep these two parts of your game separate.
 
 If you don't follow this rule of separation you will end up with a lot of redundant code. A typical bad sign is having classes in code for each individual level:
 
