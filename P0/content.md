@@ -1,126 +1,62 @@
 ---
-title: 5 Best practices for mobile game development
-slug: best-practices
+title: Resources for advanced iOS Developers
+slug: ios-resources
 --- 
 
-This article was created in preparation for a Codementor office hour. 
-It discusses 5 best practices for game development that can help you avoid common mistakes.
+The iOS developer community is great because it has many members that are contributing interesting talks, articles and blog posts. There are so many resources out there that it's hard to get a good overview. This article points to some really interesting resources for advanced iOS developers.
 
-Here's a recording of the office hour, you can find a full transcript below:
+#Blogs & Journals
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/xFyWAFX_tuE" frameborder="0" allowfullscreen></iframe>
+##Objc.io
 
-If you are interested in learning more about mobile game development you should apply to our [Summer Academy](https://www.makeschool.com/summer-academy?referrer=54750)!
+Objc.io is a monthly publication that has been around since mid 2013. Each issue covers one subject of iOS development through a collection of different articles. The articles are very detailed and mostly focus on cutting-edge frameworks and techniques. Reading objc.io is a great way of staying in touch with the latest trends in the iOS developer community.
 
-##1. Don't make assumptions about the screen size
+Link: [http://www.objc.io/](http://www.objc.io/)
 
-Even if you develop your game for iOS only it will run on a vast amount of different devices. The days in which you know the exact screen dimensions under which your game will operate are finally over. Luckily things aren't as bad as trying to make a website look good on all possible devices (think Computers, Smartphones, Televisions, Watches) but we need to put some thought into designing for multiple screen sizes.
+##NSHipster
 
-The first rule is: **never** use constant numbers to represent the screen size. It's a bad sign if you see something similar to this in your code:
-	
-	screenWidth = 320
-	myButton.x  = screenWidth - 50
-	
-You should always position your nodes relative to a value that corresponds to the screen size. In Cocos2D for example, the relevant value is the content size of the scene:
+NSHipster posts weekly articles on the *overlooked bits in Objective-C, Swift, and Cocoa*. It focuses a lot on the beauty of Apple's APIs and how they can be leveraged to write better code. Many iOS developers only work with a very small subset of available APIs. If you want to get a good overview of interesting language features and frameworks you might have missed out on, this is a great resource for you. 
 
-	myButton.x = self.contentSize.width - 50
-	
-If you follow this basic rule you have already avoided a majority of the problems that occur when assuming some constant number for the screen size. 
+Link: [http://nshipster.com/](http://nshipster.com/)
 
-What else should you think about? Typically I try to divide the content on the screen into two categories: UI elements and gameplay elements. Example for UI elements are a pause button, a highscore display, basically anything that is not part of the core gameplay. I usually place all of these UI elements relative to the screen edges:  
+##mikeash.com
 
-![](2_multiple_screen_sizes.png)
+Mike Ash's Friday Q&A has been around for ages (the first post dates back to December 2008!). The topics covered in his blog are relevant to iOS and OS X development. Most posts discuss compiler details, runtime features, or other very interesting low-level details. If you want to get a better grasp of what is going on under all the highly abstracted APIs you are using, this blog is a great place to start.
 
-This way the UI is usable on all different device sizes. For resizing the actual gameplay there is no silver bullet. In a sidescroller for example it will mostly be acceptable to show a smaller portion of the game on a smaller device, just as in the example image above.
+Link: [https://mikeash.com/pyblog/](https://mikeash.com/pyblog/)
 
-In a puzzle game with a fixed size grid that is not possible. Here you will have to make the grid work on the smallest device you support. On larger screens you can scale that grid and potentially present additional information that is *nice to have* but not required for the core gameplay.
+#Podcasts
 
-The right mindset is the most important. Try to think through what your game would look like on different screen sizes and avoid constants for screen width and screen height.
+##NSBrief
 
-##2. Separation of game mechanics and game content
+NSBrief is a very entertaining podcast that doesn't only cover technical topics. Each episode introduces an interesting iOS developer from the community. The episodes are recorded in an interview style, mixing personal questions with very technical ones. Until the end of 2014 this podcast was run by [Saul Mora](https://twitter.com/casademora), the developer of Magical Record. Now [Janie Clayton](@redqueencoder) is hosting the show. It will be interesting to see if the format changes a little.
 
-Your game mechanics should be modeled in code, your game content should be modeled in resource files. This is especially important for level based games and other content rich games (e.g. quiz games). Tools like [SpriteBuilder](http://www.spritebuilder.com/) can make it easier to keep these two parts of your game separate.
+A great way to get to know more people in the iOS developer community.
 
-If you don't follow this rule of separation you will end up with a lot of redundant code. A typical bad sign is having classes in code for each individual level:
+Link: [http://nsbrief.com/](http://nsbrief.com/)
 
-- Level1
-- Level2
-- Level3
-- ...
+##Ray Wenderlich Podcast
 
-A general rule of Software Development is that each module of code should only contain functionality that is specific to it. In most games your individual levels will not have *any* specific behavior, so you won't need classes to represent them. Instead for most simple games you should end up with a gameplay class that implements the core mechanics of your game and a resource file for each individual level:
+Most episodes feature a member of the Ray Wenderlich tutorial team discussing one specific topic. If you want to use a new framework or technique and don't feel like reading a long article to begin with, you should find a lot of interesting episodes here.
 
-![](1_resource_vs_code.png)
+Link: [http://www.raywenderlich.com/category/podcast](http://www.raywenderlich.com/category/podcast)
 
-What types of resource files should you use? For games like jump and run platformers, which can have visually complex levels, I recommend using SpriteBuilder and creating one CCB File (SpriteBuilder's scene file) for each level. If you are building a quiz game or a text adventure you should use a resource file that allows you to structure information easily. On iOS [property lists](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/PropertyLists/QuickStartPlist/QuickStartPlist.html#//apple_ref/doc/uid/10000048i-CH4-SW5) are a great type of structured resource file. Xcode provides a nice plist editor and iOS has built in parsers to generate dictionaries and arrays from plists. There are many other types of structured resource file such as XML and JSON. I recommend using property lists unless you need a feature that they don't support.
+#Talks
 
-If you strictly separate game code from game content you gain some more advantages: level designers can create new levels without modifying the game code and you can easily create content that can be added to the game dynamically, after you have shipped it.
+##Apple's WWDC Talks
 
-##3. Use the update loop for time dependent actions
+Apple's WWDC talks are the number one resource for many topics. The engineers that work on Apple's tools and frameworks give interesting talks on new features and best practices. Especially WWDC 2014 has very interesting talks introducing Swift and a vast amount of new frameworks. Note that you need Safari to watch the WWDC talks.
 
-In many games you will have actions that repeat themselves in a defined time interval. For example you might have a game that spawns enemies every couple of seconds. When working with timed actions like these it is important to understand the concept of the *update loop*. 
+Link: [https://developer.apple.com/videos/wwdc/2014/](https://developer.apple.com/videos/wwdc/2014/)
 
-Most game engines render the game scene to the screen at a certain interval, e.g. 60 times a second. These game engines have an internal timer to determine when a frame should be rendered.
+##Swift Language User Group
 
-When working with such a game engine it is important that you don't set up your own timers for your timed actions but instead use the timer of the game engine. Why? It can happen that the game engine is not able to render your game at 60 FPS, then your game will slow down.
+The Swift Language User Group is the largest Swift meetup in the world! Talks happen every two weeks, switching locations between San Francisco and Silicon Valley). If you can't make it out here in person, you can still watch the talks online. Realm, the company that hosts the meetups, publishes all talks along with the speaker's slides on their website. Another great way to learn from experienced iOS developers.
 
-If you set up your own timers they will keep running at the predefined speed while your main gameplay is running slower - different parts of your game will get out of sync.
+Link: [http://www.meetup.com/swift-language/pages/Videos_and_slides_from_previous_meetups/](http://www.meetup.com/swift-language/pages/Videos_and_slides_from_previous_meetups/)
 
-In Cocos2D there are different pretty straightforward ways to integrate your custom timed events with the update loop. You can implement a method called *update* that is called before every frame is rendered; you can also use the *schedule* method to tell Cocos2D to call a method at a certain interval. Both methods use the timer of Cocos2D's *update loop*.
+#Conclusion
 
-Whatever game engine you use, make sure your timers are integrated with the update loop!
+The amount of resources discussing iOS development is continuously growing. Hopefully this compilation will help you find interesting articles and talks on more advanced topics.
 
-##4. Use composition to share behavior between different classes
-
-Imagine a game where you have 20 different types of enemies. Each of them have some behavior in common (they can lose energy, they can switch to immortal mode) and they have some specific characteristics (one can jump, another one can move at double speed). 
-
-How could you model this game in code? One approach would be creating an enemy class with the common behavior and 20 subclasses that each have their specific behavior. But what if some of these enemies are very similar sharing 4 out of 5 characteristics? Take a look at the following example inheritance diagram:
-
-![](4_composition.png)
-
-You can see that all methods that are shared between different enemy types (e.g.. jump) are duplicated. You could try improving this a little by creating a different hierarchy of subclasses - but without multiple inheritance we cannot avoid a situation with duplicated code.
-
-One common way to solve this problem is using *Composition* instead of *Inheritance*. We can implement the specific characteristics, e.g. *jump*, *move at double speed*, *immortality* each in a separate class. In this pattern these classes are typically called *Components*. Then we can create all possible enemy types by creating an instance of the base class along with the components we want to have. That way we can create all different types of enemies by combining components instead of creating subclasses:
-
-![](4_2composition.png)  
-
-Creating a new enemy type could look somewhat like this:
-
-    jumpComponent = JumpComponent()
-    immortalityComponent = ImmortalityComponent()
-    enemy = Enemy(jumpComponent, immortalityComponent)
-    
-One last question we should discuss is how these components are implemented. A *jump* component for example will need a way to actually move the enemy object it belongs to. In most simple cases it is sufficient to have a bunch of public variables on the class that owns the components. These variables include anything that can be changed by components (e.g. speed, position, health, etc.). Each component gets a reference to the object it belongs to and can read and modify these public variables. There are many different ways to implement this pattern, you can read a great and extensive discussion about it in the [Game Programming Patterns Book](http://gameprogrammingpatterns.com/component.html).
-
-This is one of the patterns that I believe are useful early on in a game developer career!
-
-##5. Use factory methods to create objects that use composition
-
-This last best practice simply builds on top of the composition pattern. You probably realized that creating enemy instances became more complex using the pattern. If we had individual subclasses for each enemy type, creating an enemy of a specific type would look like this:
-
-     // enemy with jump and immortality behavior
-     enemy = EnemyType1()
-     
-Instead, when using components we need to know which components are required for a certain enemy type:
-
-    jumpComponent = JumpComponent()
-    immortalityComponent = ImmortalityComponent()
-    enemy = Enemy(jumpComponent, immortalityComponent)
-    
-Using the factory pattern we can hide this complexity behind simpler methods. The factory pattern was originally described in the famous *Design Patterns* book. Applied to our example we could come up with the following factory methods:
-
-    func createEnemyType1 -> Enemy {
-      jumpComponent = JumpComponent()
-      immortalityComponent = ImmortalityComponent()
-      enemy = Enemy(jumpComponent, immortalityComponent)
-    }
-    
-    func createEnemyType2 -> Enemy {
-      immortalityComponent = ImmortalityComponent()
-      enemy = Enemy(immortalityComponent)
-    }
-    
-Now we have a simple interface for creating different enemy types and our enemies consist of reusable components, great!
-I hope you enjoyed these best practices, they should help you avoid some common mistakes.
-
-You will have the chance to learn more best practices at our [Summer Academy](https://www.makeschool.com/summer-academy?referrer=54750).
+Are we missing a great resource? Comment below or open a [pull request](https://github.com/MakeSchool-Tutorials/Advanced-Resources-iOS-Development).
